@@ -1,0 +1,399 @@
+<html>
+<head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="table-responsive">
+            <h1>Create Meal Plan Template</h1>
+            <br />
+
+            <!-- <form id="myForm"> -->
+
+                <h3> Click On "Add Day" Button To Add A Day </h3>
+                <div id="DayCounts">
+                </div>
+
+                <!-- <table class="table table-bordered table-striped" id="mealplantable">
+                    <tr>
+                        <th style="padding-right: 100px;">Pre-Breakfast</th>
+                        <th style="padding-right: 100px;">Breakfast</th>
+                        <th style="padding-right: 100px;">Pre-Lunch</th>
+                        <th style="padding-right: 100px;">Lunch</th>
+                        <th style="padding-right: 100px;">Evening Snack</th>
+                        <th style="padding-right: 100px;">Dinner</th>
+                        <th style="padding-right: 100px;">Post-Dinner</th>
+                        <th style="padding-right: 100px;">Pre-Workout</th>
+                        <th style="padding-right: 100px;">Post-Workout</th>
+
+                    </tr>
+                </table>
+            </form> -->
+
+
+            
+            <input type="button" name="addday" value="Add Day" class="btn btn-primary" id="addday">
+
+            <input type="button" name="savetemplate" value="Save Template" class="btn btn-primary" id="savetemplate">
+
+
+
+        <!-- HTML For Save As Template POP UP-->
+
+
+    <div class="modal fade" id="SaveAsTemplatePopUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="exampleModalLabel"> Save As Template </h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="SaveAsTemplateForm">
+                        <div class="form-group">
+                            <label for="ailments" class="col-form-label"> Ailments </label>
+                            <select class="form-control" id="ailments" name="ailments">
+                                <option>PCOS</option>
+                                <option>Thyroid</option>
+                                <option>Cholesterol</option>
+                                <option>Uric Acid</option>
+                                <option>Lactose Intolerance</option>
+                                <option>Gluten Intolerance</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bmirange" class="col-form-label"> BMI Range </label>
+                            <select class="form-control" id="bmirange" name="bmirange">
+                                <option>High</option>
+                                <option>Low</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mealpreference" class="col-form-label"> Meal Preference </label>
+                            <select class="form-control" id="mealpreference" name="mealpreference">
+                                <option>Veg</option>
+                                <option>Non-Veg</option>
+                                <option>Vegan</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cuisine" class="col-form-label"> Cuisine </label>
+                            <select class="form-control" id="cuisine" name="cuisine">
+                                <option>North Indian</option>
+                                <option>South Indian</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="agerange" class="col-form-label"> Age Range </label>
+                            <select class="form-control" id="agerange" name="agerange">
+                                <option>Below 18</option>
+                                <option>18-24</option>
+                                <option>25-34</option>
+                                <option>35-44</option>
+                                <option>45-54</option>
+                                <option>55-64</option>
+                                <option>65+</option>
+                            </select>
+                        </div>
+
+                        
+                        <div class="form-group">
+                            <label for="sex" class="col-form-label"> Sex </label>
+                            <select class="form-control" id="sex" name="sex">
+                                <option>Male</option>
+                                <option>Female</option>
+                            </select>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" id="btnsavetemplate">Save Template</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+<script>
+    jQuery(document).ready(function( $ ){
+    $('#savetemplate').click(function(){
+        $('#SaveAsTemplatePopUp').modal('show')
+	});
+});
+
+</script>
+
+<!-- Script For Adding HTML Table On "Add Day" Button Click-->
+<script>
+    var count1 = 1;
+    $("#addday").click(function () {
+
+        $("#DayCounts").append('<h3> Day' + count1 + '</h3><form id="myForm2"><table class="table table-bordered table-striped" id="mealplantable' + count1 + '"><tr><th style="padding-right: 100px;">Pre-Breakfast</th>' 
+            + '<th style="padding-right: 100px;">Breakfast</th><th style="padding-right: 100px;">Pre-Lunch</th><th style="padding-right: 100px;">Lunch</th>'
+            + '<th style="padding-right: 100px;">Evening Snack</th><th style="padding-right: 100px;">Dinner</th><th style="padding-right: 100px;">Post-Dinner</th><th style="padding-right: 100px;">Pre-Workout</th><th style="padding-right: 100px;">Post-Workout</th></tr></table></form><button id="btnaddmealoption' + count1 + '" class="btn btn-primary">Add Meal Option</button>' );
+
+
+
+        count1++;
+
+
+    });
+</script>
+
+<!-- Script For Adding Rows into particular day table (For Day 1)-->
+<script>
+var count2 = 1;
+$(document).on('click', '#btnaddmealoption1', function (e) {
+    e.preventDefault();
+
+ 
+    $("#mealplantable1").append('<tr id="id' + count2 + '">'
+            + '<td><input type="text" class="form-control" id="day1prebreakfast' + count2 + '" name="day1prebreakfast' + count2 + '"></td> '
+            + '<td><input type="text" class="form-control" id="day1breakfast' + count2 + '" name="day1breakfast' + count2 + '" required></td>'
+            + '<td><input type="text" class="form-control" id="day1prelunch' + count2 + '" name="day1prelunch' + count2 + '"></td>'
+            + '<td><input type="text" class="form-control" id="day1lunch' + count2 + '" name="day1lunch' + count2 + '"></td>'
+            + '<td><input type="text" class="form-control" id="day1eveningsnack' + count2 + '" name="day1eveningsnack' + count2 + '"></td>'
+            + '<td><input type="text" class="form-control" id="day1dinner' + count2 + '" name="day1dinner' + count2 + '"></td>'
+            + '<td><input type="text" class="form-control" id="day1postdinner' + count2 + '" name="day1postdinner' + count2 + '"></td>'
+            + '<td><input type="text" class="form-control" id="day1preworkout' + count2 + '" name="day1preworkout' + count2 + '"></td>'
+            + '<td><input type="text" class="form-control" id="day1postworkout' + count2 + '" name="day1postworkout' + count2 + '"></td></tr>');
+
+        count2++;
+});
+</script>
+
+<!-- Script For Adding Rows into particular day table (For Day 2)-->
+<script>
+var count = 1;
+    $(document).on('click', '#btnaddmealoption2', function (e) {
+        e.preventDefault();
+    
+        
+        $("#mealplantable2").append('<tr id="id' + count + '">'
+                + '<td><input type="text" class="form-control" id="day2prebreakfast' + count + '" name="day2prebreakfast' + count + '"></td> '
+                + '<td><input type="text" class="form-control" id="day2breakfast' + count + '" name="day2breakfast' + count + '" required></td>'
+                + '<td><input type="text" class="form-control" id="day2prelunch' + count + '" name="day2prelunch' + count + '"></td>'
+                + '<td><input type="text" class="form-control" id="day2lunch' + count + '" name="day2lunch' + count + '"></td>'
+                + '<td><input type="text" class="form-control" id="day2eveningsnack' + count + '" name="day2eveningsnack' + count + '"></td>'
+                + '<td><input type="text" class="form-control" id="day2dinner' + count + '" name="day2dinner' + count + '"></td>'
+                + '<td><input type="text" class="form-control" id="day2postdinner' + count + '" name="day2postdinner' + count + '"></td>'
+                + '<td><input type="text" class="form-control" id="day2preworkout' + count + '" name="day2preworkout' + count + '"></td>'
+                + '<td><input type="text" class="form-control" id="day2postworkout' + count + '" name="day2postworkout' + count + '"></td></tr>');
+    
+            count++;
+    });
+    </script>
+
+<!-- Script For Adding Rows into particular day table (For Day 3)-->
+<script>
+    var count3 = 1;
+        $(document).on('click', '#btnaddmealoption3', function (e) {
+            e.preventDefault();
+        
+            
+            $("#mealplantable3").append('<tr id="id' + count3 + '">'
+                    + '<td><input type="text" class="form-control" id="day3prebreakfast' + count3 + '" name="day3prebreakfast' + count3 + '"></td> '
+                    + '<td><input type="text" class="form-control" id="day3breakfast' + count3 + '" name="day3breakfast' + count3 + '" required></td>'
+                    + '<td><input type="text" class="form-control" id="day3prelunch' + count3 + '" name="day3prelunch' + count3 + '"></td>'
+                    + '<td><input type="text" class="form-control" id="day3lunch' + count3 + '" name="day3lunch' + count3 + '"></td>'
+                    + '<td><input type="text" class="form-control" id="day3eveningsnack' + count3 + '" name="day3eveningsnack' + count3 + '"></td>'
+                    + '<td><input type="text" class="form-control" id="day3dinner' + count3 + '" name="day3dinner' + count3 + '"></td>'
+                    + '<td><input type="text" class="form-control" id="day3postdinner' + count3 + '" name="day3postdinner' + count3 + '"></td>'
+                    + '<td><input type="text" class="form-control" id="day3preworkout' + count3 + '" name="day3preworkout' + count3 + '"></td>'
+                    + '<td><input type="text" class="form-control" id="day3postworkout' + count3 + '" name="day3postworkout' + count3 + '"></td></tr>');
+        
+                count3++;
+        });
+        </script>
+
+<!-- Script For Adding Rows into particular day table (For Day 4)-->
+<script>
+    var count4 = 1;
+        $(document).on('click', '#btnaddmealoption4', function (e) {
+            e.preventDefault();
+        
+            
+            $("#mealplantable4").append('<tr id="id' + count4 + '">'
+                    + '<td><input type="text" class="form-control" id="day4prebreakfast' + count4 + '" name="day4prebreakfast' + count4 + '"></td> '
+                    + '<td><input type="text" class="form-control" id="day4breakfast' + count4 + '" name="day4breakfast' + count4 + '" required></td>'
+                    + '<td><input type="text" class="form-control" id="day4prelunch' + count4 + '" name="day4prelunch' + count4 + '"></td>'
+                    + '<td><input type="text" class="form-control" id="day4lunch' + count4 + '" name="day4lunch' + count4 + '"></td>'
+                    + '<td><input type="text" class="form-control" id="day4eveningsnack' + count4 + '" name="day4eveningsnack' + count4 + '"></td>'
+                    + '<td><input type="text" class="form-control" id="day4dinner' + count4 + '" name="day4dinner' + count4 + '"></td>'
+                    + '<td><input type="text" class="form-control" id="day4postdinner' + count4 + '" name="day4postdinner' + count4 + '"></td>'
+                    + '<td><input type="text" class="form-control" id="day4preworkout' + count4 + '" name="day4preworkout' + count4 + '"></td>'
+                    + '<td><input type="text" class="form-control" id="day4postworkout' + count4 + '" name="day4postworkout' + count4 + '"></td></tr>');
+        
+                count4++;
+        });
+        </script>
+
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<!-- Script For Creating Obj From Meal Options-->
+
+            <script>
+            $(document).ready(function () {
+            $("#btnsavetemplate").click(function (e) {
+            e.preventDefault();
+
+                        
+            var meal_plan = [];
+            var mealday1 = [];
+            var meal_details = {};
+
+            var tabel = document.getElementById('mealplantable1');
+            var rijen = tabel.rows.length;
+
+            for (i = 1; i < rijen; i++) {
+
+            if (document.getElementById('day1prebreakfast'+i).value) {
+                meal_details.prebreakfastday1 = document.getElementById('day1prebreakfast'+i).value; 
+                meal_details.breakfast = document.getElementById('day1breakfast'+i).value;
+                meal_details.prelunch = document.getElementById('day1prelunch'+i).value;
+                meal_details.lunch = document.getElementById('day1lunch'+i).value;
+                meal_details.eveningsnack = document.getElementById('day1eveningsnack'+i).value;
+                meal_details.dinner = document.getElementById('day1dinner'+i).value;
+                meal_details.postdinner = document.getElementById('day1postdinner'+i).value;
+                meal_details.preworkout = document.getElementById('day1preworkout'+i).value;
+                meal_details.postworkout = document.getElementById('day1postworkout'+i).value;
+                meal_plan.push(meal_details);
+                meal_details = {};
+            }
+
+
+        }
+
+// Check If Second Table (2nd Day) Exists Or Not
+        if (document.getElementById('mealplantable2'))
+        {
+        var tabel2 = document.getElementById('mealplantable2');
+        var rijen2 = tabel2.rows.length;
+
+            for (j = 1; j < rijen2; j++) {
+
+            if (document.getElementById('day2prebreakfast'+j).value) {
+                meal_details.prebreakfast = document.getElementById('day2prebreakfast'+j).value;
+                meal_details.breakfast = document.getElementById('day2breakfast'+j).value;
+                meal_details.prelunch = document.getElementById('day2prelunch'+j).value;
+                meal_details.lunch = document.getElementById('day2lunch'+j).value;
+                meal_details.eveningsnack = document.getElementById('day2eveningsnack'+j).value;
+                meal_details.dinner = document.getElementById('day2dinner'+j).value;
+                meal_details.postdinner = document.getElementById('day2postdinner'+j).value;
+                meal_details.preworkout = document.getElementById('day2preworkout'+j).value;
+                meal_details.postworkout = document.getElementById('day2postworkout'+j).value;
+                meal_plan.push(meal_details);
+                meal_details = {};
+            }
+        }
+    }
+
+    // Check If Third Table (3rd Day) Exists Or Not
+    if (document.getElementById('mealplantable3'))
+        {
+        var tabel3 = document.getElementById('mealplantable3');
+        var rijen3 = tabel3.rows.length;
+
+            for (k = 1; k < rijen3; k++) {
+
+            if (document.getElementById('day3prebreakfast'+k).value) {
+                meal_details.prebreakfast = document.getElementById('day3prebreakfast'+k).value;
+                meal_details.breakfast = document.getElementById('day3breakfast'+k).value;
+                meal_details.prelunch = document.getElementById('day3prelunch'+k).value;
+                meal_details.lunch = document.getElementById('day3lunch'+k).value;
+                meal_details.eveningsnack = document.getElementById('day3eveningsnack'+k).value;
+                meal_details.dinner = document.getElementById('day3dinner'+k).value;
+                meal_details.postdinner = document.getElementById('day3postdinner'+k).value;
+                meal_details.preworkout = document.getElementById('day3preworkout'+k).value;
+                meal_details.postworkout = document.getElementById('day3postworkout'+k).value;
+                meal_plan.push(meal_details);
+                meal_details = {};
+            }
+        }
+    }
+
+    
+
+
+                            //const searchParams = new URLSearchParas();
+
+                            var ailments = document.getElementById("ailments").value;
+                            console.log(ailments);
+                            var bmirange = document.getElementById("bmirange").value;
+                            var mealpreference = document.getElementById("mealpreference").value;
+                            var cuisine = document.getElementById("cuisine").value;
+                            var agerange = document.getElementById("agerange").value;
+                            var sex = document.getElementById("sex").value;
+
+                            
+                            // searchParams.append("ailments", ailments);
+                            // searchParams.append("bmirange", bmirange);
+                            // searchParams.append("mealpreference", mealpreference);
+                            // searchParams.append("cuisine", cuisine);
+                            // searchParams.append("agerange", agerange);
+                            // searchParams.append("sex", sex);
+                            // console.log(searchParams);
+
+                            const mealPlanApi={
+                                'ailments':ailments,
+                                'bmirange':bmirange,
+                                'mealpreference':mealpreference,
+                                'cuisine':cuisine,
+                                'agerange':agerange,
+                                'sex':sex,
+                                'meal_plan':meal_plan
+                            }
+                            console.log(mealPlanApi);
+
+                            // searchParams.append("meal_plan", JSON.stringify(meal_plan));
+                            // console.log(meal_plan);
+
+                            const options={
+                                method: 'POST',
+                                headers:{
+                                    'Content-Type':'application/JSON'
+                                },
+                                body: JSON.stringify(mealPlanApi),
+                            }
+
+                            fetch('/save_meal_plan_template', options).then(function (response) {
+                                return response.text();
+                            }).then(function (text) {
+                                console.log(text);
+                            }).catch(function (error) {
+                                console.error(error);
+                            })
+                        
+                
+                    });
+                });
+
+            </script>
+
+
+</body>
+
+</html>
+
+

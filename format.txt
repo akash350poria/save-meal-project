@@ -1,0 +1,38 @@
+{
+  "ailments": "",
+  "bmi_range": "",
+  "meal_preference": "",
+  "cuisine": "",
+  "age_range": "",
+  "sex": "",
+  "meal_plan": [
+    //Day 1
+    {
+      "pre-breakfast": [
+        "eggs", //option 1
+        "tea", //option 2
+        "omlette + bread with tea" //option3
+      ],
+      "breakfast": [
+        "milk + bananas", //option 1
+        "tea + oats" //option 2
+      ],
+      "meal 3": [],
+      "meal 4": []
+    },
+    //Day 2
+    {
+      "pre-breakfast": [
+        "taost" //option 1
+      ],
+      "breakfast": [
+        "pad thai", //option 1
+        "chicken breast" //option 2
+      ],
+      "lunch": [
+        "chicken + bhakri"
+      ],
+      "meal 4": []
+    }
+  ]
+}
