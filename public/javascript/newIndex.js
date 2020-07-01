@@ -2,8 +2,11 @@ const saveTemplateButton = document.getElementById("saveTemplate");
 const addDayButton = document.getElementById("addDay");
 const formDiv = document.getElementById("formDiv");
 let dayCounter = 1;
+const dayOptionCounter = {};
 
 addDayFunc = () => {
+  dayOptionCounter["Day" + dayCounter] = 1;
+  console.log(dayOptionCounter);
   let tableHeader =
     "<h4>DAY " +
     dayCounter +
@@ -18,8 +21,9 @@ addDayFunc = () => {
   dayCounter++;
 };
 
-addMealOptionFunc = (dayNumber) => {
-  let optionCounter = 1;
+addMealOptionFunc = (dayNumber, optionCounter) => {
+  let newRow = document.createElement("tr");
+  document.getElementById("mealPlan" + dayNumber).appendChild(newRow);
   let meals = [
     "prebreakfast",
     "breakfast",
@@ -32,60 +36,66 @@ addMealOptionFunc = (dayNumber) => {
     "postworkout",
   ];
   meals.forEach((meal) => {
+    let newColumn = document.createElement("td");
+    newColumn.id = "option" + optionCounter + dayNumber;
     let optionContent =
-      "<tr><thead>ITEM</thead><thead>QUANTITY</thead></tr><tr id='option1'" +
-      dayNumber +
-      "><td><input id='" +
+      "<table><tr style='text-align:center';>Option" +
+      optionCounter +
+      "</tr><tr><td><input id='option" +
+      optionCounter +
       meal +
       "item1" +
       dayNumber +
-      "' type='text' class='form-control' placeholder='Item 1'></td><td><input id='" +
+      "' type='text' class='form-control' placeholder='Item 1'></td><td><input id='option" +
+      optionCounter +
       meal +
       "quantity1" +
       dayNumber +
-      "' type='text' class='form-control' placeholder='Quantity 1'></td></tr><tr id='option2'" +
-      dayNumber +
-      "><td><input id='" +
+      "' type='text' class='form-control' placeholder='Quantity 1'></td></tr><tr><td><input id='option" +
+      optionCounter +
       meal +
       "item2" +
       dayNumber +
-      "' type='text' class='form-control' placeholder='Item 2'></td><td><input id='" +
+      "' type='text' class='form-control' placeholder='Item 2'></td><td><input id='option" +
+      optionCounter +
       meal +
       "quantity2" +
       dayNumber +
-      "' type='text' class='form-control' placeholder='Quantity 2'></td></tr><tr id='option3'" +
-      dayNumber +
-      "><td><input id='" +
+      "' type='text' class='form-control' placeholder='Quantity 2'></td></tr><tr><td><input id='option" +
+      optionCounter +
       meal +
       "item3" +
       dayNumber +
-      "' type='text' class='form-control' placeholder='Item 3'></td><td><input id='" +
+      "' type='text' class='form-control' placeholder='Item 3'></td><td><input id='option" +
+      optionCounter +
       meal +
       "quantity3" +
       dayNumber +
-      "' type='text' class='form-control' placeholder='Quantity 3'></td></tr><tr id='option4'" +
-      dayNumber +
-      "><td><input id='" +
+      "' type='text' class='form-control' placeholder='Quantity 3'></td></tr><tr><td><input id='option" +
+      optionCounter +
       meal +
       "item4" +
       dayNumber +
-      "' type='text' class='form-control' placeholder='Item 4'></td><td><input id='" +
+      "' type='text' class='form-control' placeholder='Item 4'></td><td><input id='option" +
+      optionCounter +
       meal +
       "quantity4" +
       dayNumber +
-      "' type='text' class='form-control' placeholder='Quantity 4'></td></tr><tr id='option5'" +
-      dayNumber +
-      "><td><input id='" +
+      "' type='text' class='form-control' placeholder='Quantity 4'></td></tr><tr><td><input id='option" +
+      optionCounter +
       meal +
       "item5" +
       dayNumber +
-      "' type='text' class='form-control' placeholder='Item 5'></td><td><input id='" +
+      "' type='text' class='form-control' placeholder='Item 5'></td><td><input id='option" +
+      optionCounter +
       meal +
       "quantity5" +
       dayNumber +
-      "' type='text' class='form-control' placeholder='Quantity 5'></td></tr>";
-    $("#mealPlan" + dayNumber).append(optionContent);
+      "' type='text' class='form-control' placeholder='Quantity 5'></td></tr></table>";
+    newColumn.innerHTML = optionContent;
+    newRow.appendChild(newColumn);
   });
+  dayOptionCounter["Day" + dayNumber.slice(-1)] += 1;
 };
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -99,7 +109,10 @@ addDayButton.addEventListener("click", addDayFunc);
 document.addEventListener("click", (event) => {
   if (event.target && event.target.id.includes("addMealDay")) {
     let dayNum = "Day" + event.target.id.slice(-1);
-    console.log(dayNum);
-    addMealOptionFunc(dayNum);
+    console.log(dayOptionCounter["Day" + event.target.id.slice(-1)]);
+    addMealOptionFunc(
+      dayNum,
+      dayOptionCounter["Day" + event.target.id.slice(-1)]
+    );
   }
 });
