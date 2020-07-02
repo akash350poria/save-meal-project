@@ -10,7 +10,7 @@ app.use(express.json({ limit: "1mb" }));
 
 //------------------ROUTES-------------------------------
 app.get("/", function (req, res) {
-  res.sendFile("index.html", { root: __dirname + "/views" });
+  res.sendFile("newIndex.html", { root: __dirname + "/views" });
 });
 
 app.get("/save_meal_plan_template", function (req, res) {
@@ -19,7 +19,7 @@ app.get("/save_meal_plan_template", function (req, res) {
 
 app.post("/save_meal_plan_template", function (req, res) {
   console.log("This route works");
-  console.log(res.body);
+  console.log(req.body);
   res.redirect("/save_meal_plan_template");
 });
 
