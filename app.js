@@ -19,7 +19,7 @@ app.get("/save_meal_plan_template", function (req, res) {
 
 app.post("/save_meal_plan_template", function (req, res) {
   console.log("This route works");
-  console.log(req.body);
+  console.log(req.body.mealPlanApi);
   res.redirect("/save_meal_plan_template");
 });
 

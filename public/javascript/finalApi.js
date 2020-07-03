@@ -84,19 +84,25 @@ $(document).ready(function () {
       date: todayDate,
       meal_plan: meal_plan,
     };
-    console.log(mealPlanApi);
+    //console.log(mealPlanApi);
+
+    const searchParams = new URLSearchParams();
+    searchParams.append("mealPlanApi", JSON.stringify(mealPlanApi));
 
     const fetchOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/JSON",
       },
-      body: JSON.stringify(mealPlanApi),
+      body: searchParams,
     };
 
     fetch("/save_meal_plan_template", fetchOptions)
       .then((response) => {
-        console.log(response);
+        return response.text();
+      })
+      .then((text) => {
+        console.log(text);
       })
       .catch((error) => {
         console.log(error);
